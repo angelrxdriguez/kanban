@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOG</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">
+            <img src="fotos/logo.jpg" alt="Logo" height="90" class="foto">
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-current="page" href="index.html">AREAS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="concesionario.html">USUARIO</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <div class="log">
+      <div class="izq">
+        <img src="fotos/logo.jpg" alt="" class="logo">
+      </div>
+      <div class="der">
+        <h1 class="h1log">REGISTRO</h1>
+        <hr>
+        <form action="checkcontra.php" method="post">
+          <label for="nombre">Nombre de usuario</label>
+          <input type="text" name="nombre" required>
+      
+          <label for="contra1">Contraseña</label>
+          <input type="password" name="contra1" required>
+      
+          <label for="contra2">Repetir Contraseña</label>
+          <input type="password" name="contra2" required>
+          <a href="log.html">INICIAR SESIÓN</a>
+          <button type="submit" class="aceptar">ACEPTAR</button>
+      </form>
+      
+      </div>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

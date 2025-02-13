@@ -1,0 +1,361 @@
+body{
+    /*background-image: url(fotos/fondo.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;*/
+    background-color: #a5e2f7 !important;
+    font-family: "Bowlby One SC", serif !important;
+    font-weight: 400;
+    font-style: normal;
+}
+.foto{
+    border-radius: 100%;
+}
+.log{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    border: solid 3px ;
+    width: 50%;
+    background-color: aliceblue;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 5%;
+}
+.der{
+    width: 100%;
+    background-color: aliceblue;
+    border-radius: 14px;
+}
+.izq{
+    align-items: center;
+    display: flex;
+    width: 100%;
+    border-radius: 14px;
+    border-right: solid;
+background-color: #16abdc;
+}
+form{
+width: 70%;
+display: flex;
+flex-direction: column;
+margin: 0 auto;
+}
+label{
+    align-items: start;
+}
+.logo{
+    width: 100%;
+    border-radius: 3%;
+}
+.h1log{
+    text-align: center;
+}
+.aceptar{
+    border: solid 1px black;
+    border-radius: 10px;
+    background-color: #16abdc;
+    color: white;
+    font-size: 120%;
+    margin: 4%;
+    padding: 1.5%;
+}
+.aceptar:hover{
+    background-color: rgb(37, 158, 228);
+}
+.aceptar:active{
+    background-color: #16abdc;
+}
+hr{
+    display: none;
+}
+a{
+    color: #16abdc;
+    text-decoration: none;
+    text-decoration: underline black;
+}
+.navbar.navbar-expand-md.navbar-dark.bg-dark{
+    background-color: #16abdc !important;
+    margin-bottom: 2%;
+}
+.nav-link.disabled{
+    color: rgb(54, 54, 54) !important;
+    font-size: 150%;
+}
+input{
+    border-radius: 10px;
+    border: none;
+    border: solid 2px;
+}
+.nav-item{
+    margin-right: 4%;
+}
+.nav-item:hover{
+    text-decoration: underline #a5e2f7;
+}
+.usuario{
+    background-color: #000;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+}
+/*INDICE*/
+.index{
+    background-color: white !important;
+}
+.container50{
+    display: block;
+    margin: 0 auto;
+    background-color: #a5e2f7;
+    border-radius: 20px;
+    padding: 1%;
+    width: 70%;
+    margin-top:6%;
+}
+.containertit{
+    padding: 20px;
+    margin-top: 2%;
+background-color: #a5e2f7;
+}
+.tit{
+    background-color: #16abdc;
+    color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    border-radius: 25px;
+}
+.nav-link{
+    color: white !important;
+    font-size: 130%;
+}
+.contenedor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+.columnaizq, .columna, .columnader, .columnader2 {
+    width: 30%; 
+    text-align: center;
+    padding: 10px;
+}
+
+.columnaizq{
+    background-color: #f7a5a5;
+    border-radius: 20px;
+    margin: 1%;
+}
+.columnader{
+    background-color: #f6f7a5;
+    border-radius: 20px;
+    margin: 1%;
+
+}
+.columnader2{
+    background-color: #a5f7a5;
+    border-radius: 20px;
+    margin: 1%;
+}
+.columna {
+    background-color: #f7daa5;
+    border-radius: 20px;
+    margin: 1%;
+
+}
+.containerenlace {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.kanbanenlace {
+    text-decoration: none; 
+font-size: 200%;
+    color: #000; 
+}
+.kanbanenlace:hover{
+    color: #16abdc;
+    text-decoration: underline;
+}
+
+.kanbanenlace::before{
+    content: "MI-";
+    color:#16abdc ;
+    border-top: solid;
+}
+/*TABLERO KANBAN*/
+.tablerokanban{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    text-align: center;
+    margin: 0 auto;
+}
+.separador{
+    height: 4px;
+    background-color: #16abdc;
+    margin-top: 1%;
+margin-bottom: -1%;
+}
+.columnak{
+margin: 5%;
+width: 90%;
+height: 100%;
+box-shadow: #5a5a5a 5px 5px 25px;
+border-bottom-left-radius:20px ;
+
+}
+.titk{
+    background-color: #ffffff8e;
+    padding: 2%;
+    border-bottom: #000 solid;
+}
+nav{
+    text-align: center;
+}
+.crear{
+    background-color: #16abdc !important;
+    padding: 1% !important;
+    color: white;
+    font-size: 150%;
+}
+.crear:hover{
+    background-color: #a5f7a5 !important;
+    color: #000 !important;
+    transition: 0.05s;
+}
+.editar{
+    background-color: #16abdc;
+    padding: 1%;
+    color: white;
+    font-size: 130%;
+}
+.editar:hover{
+    background-color: #fbff00;
+    transition: 0.05s;
+    border-radius: 10px;
+    color: #000;
+}
+.idea{
+background-color: #f7a5a5;
+}
+.hacer{
+background-color: #f7daa5;
+}
+.haciendo{
+    background-color: #f6f7a5;
+}
+.hecho{
+background-color: #a5f7a5;
+}
+.tarea{
+    background-color: #16abdc;
+    color: white;
+    margin-bottom: 5%;
+    border: solid #000 ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 5%;
+    border-radius: 5px;
+}
+.tittarea{
+    padding: 2%;
+    color: black;
+    text-transform: uppercase;
+    background-color: #a5e2f7 !important;
+}
+.colaboradores{
+    margin-top: 1%;
+    color: white !important;
+    text-transform: uppercase;
+    color: #000;
+    
+}
+.botones{
+    display: flex;
+    background-color: #16abdc;
+}
+button{
+    background: none;
+    border: none;
+}
+.flecha{
+    width:30%;
+    filter: brightness(0) invert(1);
+}
+.flecha:hover{
+    background-color: #000;
+    border-radius: 100%;
+    filter: none;
+}
+/*MODAL*/
+.modal.fade{
+    margin-top: 5% !important;
+}
+.oscuro{
+    background-color:rgb(46, 46, 46) !important ;
+    color: white !important;
+    text-align: center !important;
+    border-radius: 10px;
+}
+@media (min-width: 768px) and (max-width: 1458px) {
+    .log {
+        flex-direction: column;
+        width: 70%;
+        text-align: center;
+    }
+
+    .der, .izq {
+        width: 100%;
+        border: none;
+    }
+
+    form {
+        width: 50%;
+        text-align: start;
+    }
+
+    .logo {
+        width: 20%;
+        border-radius: 80%;
+        margin: auto;
+        margin-top: 2%;
+    }
+    hr{
+        display: flex;
+        color: red;
+    }
+}
+@media (max-width: 768px) {
+    .log {
+        flex-direction: column;
+        width: 90%;
+        text-align: center;
+    }
+
+    .der, .izq {
+        width: 100%;
+        border: none;
+    }
+
+    form {
+        width: 75%;
+        text-align: start;
+    }
+
+    .logo {
+        width: 40%;
+        border-radius: 80%;
+        margin: auto;
+        margin-top: 2%;
+    }
+    hr{
+        display: flex;
+        color: red;
+    }
+}
