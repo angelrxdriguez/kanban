@@ -8,7 +8,7 @@ $cliente = new MongoDB\Client($uri);
 $bd = $cliente->kanvan;  // Con "V", como mencionaste
 $coleccion = $bd->tareas;
 
-// Iniciar sesión para acceder al usuario logueado o no
+// Iniciar sesión para acceder al usuario logueado
 session_start();
 
 // Comprobar si hay un usuario logueado
@@ -106,6 +106,7 @@ foreach ($tareas as $tarea) {
                   <div class="botones">
                     <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
                     <button class="editar">EDITAR</button>
+                    <button class="colaborador">colaborador</button>
                     <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
                 </div>
                   <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
@@ -124,6 +125,7 @@ foreach ($tareas as $tarea) {
                   <div class="botones">
                     <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
                     <button class="editar">EDITAR</button>
+                    <button class="colaborador">colaborador</button>
                     <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
                 </div>
                   <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
@@ -142,6 +144,7 @@ foreach ($tareas as $tarea) {
                   <div class="botones">
                     <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
                     <button class="editar">EDITAR</button>
+                    <button class="colaborador">colaborador</button>
                     <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
                 </div>
                   <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
@@ -160,6 +163,7 @@ foreach ($tareas as $tarea) {
                   <div class="botones">
                     <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
                     <button class="editar">EDITAR</button>
+                    <button class="colaborador">colaborador</button>
                     <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
                 </div>
                   <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
@@ -189,7 +193,7 @@ foreach ($tareas as $tarea) {
                 </div>
                 <div class="mb-3">
                     <label for="colaboradores" class="form-label">Colaboradores</label>
-                    <input type="text" class="form-control" name="colaboradores" placeholder="Ingrese el nombre correcto">
+                    <input type="text" class="form-control" name="colaboradores" placeholder="SOLO UN COLABORADOR">
                 </div>
                 <button type="submit" class="btn btn-primary" name="crearTarea">Crear</button>
             </form>
@@ -222,10 +226,10 @@ foreach ($tareas as $tarea) {
                         <label for="descripcionTarea" class="form-label">Descripción</label>
                         <textarea class="form-control" name="descripcion" id="editartarea-descripcion" rows="3" placeholder="Describe la tarea" required></textarea>
                     </div>
-                    <div class="mb-3">
+                   <!-- <div class="mb-3">
                         <label for="colaboradores" class="form-label">Colaboradores</label>
                         <input type="text" class="form-control" name="colaboradores" id="editartarea-colaboradores" placeholder="Ingrese el nombre correcto">
-                    </div>
+                    </div>-->
                     <button type="submit" class="btn btn-primary" name="editarTarea">Editar</button>
                 </form>
                 <div class="mt-4 text-center">
@@ -233,6 +237,30 @@ foreach ($tareas as $tarea) {
                     <button id="eliminar-tarea-btn" class="btn btn-danger">Eliminar</button>
                     <h6 class="mt-2 text-danger">¡CUIDADO! Tu tarea no se volverá a mostrar.</h6>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para Agregar Colaborador -->
+<div class="modal fade" id="modalColaborador" tabindex="-1" aria-labelledby="modalColaboradorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalColaboradorLabel">Agregar Colaborador</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formColaborador">
+                    <div class="mb-3">
+                        <label for="nombreColaborador" class="form-label">Nombre del Colaborador</label>
+                        <input type="text" class="form-control" id="nombreColaborador" name="nombreColaborador" placeholder="Ingresa el nombre del colaborador" required>
+                    </div>
+                    <input type="hidden" id="tareaId" name="tareaId">
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

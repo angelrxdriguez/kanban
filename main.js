@@ -132,4 +132,48 @@ $(document).ready(function () {
                 }
             });
 })
+/*colaborador*/
+$(".colaborador").on("click", function () {
+    const tareaId = $(this).closest(".tarea").data("id"); // Obtener el ID de la tarea
+    $("#tareaId").val(tareaId); // Pasar el ID de la tarea al input oculto en el modal
+    $("#modalColaborador").modal("show"); // Mostrar el modal
+});
+
+// Manejar el envío del formulario para agregar colaborador
+$("#formColaborador").on("submit", function (e) {
+    e.preventDefault(); // Prevenir el envío del formulario
+
+    const nombreColaborador = $("#nombreColaborador").val().trim();
+    const tareaId = $("#tareaId").val();
+
+    if (!nombreColaborador) {
+        alert("Por favor, ingresa un nombre de colaborador.");
+        return;
+    }
+
+    // Enviar los datos al servidor con AJAX
+    $.ajax({
+        url: "agregarColaborador.php",
+        type: "POST",
+        data: {
+            nombreColaborador: nombreColaborador,
+            tareaId: tareaId,
+        },
+        success: function (response) {
+            const res = JSON.parse(response);
+            if (res.success) {
+                alert("Colaborador agregado con éxito.");
+                $(`[data-id="${tareaId}"] .colaboradores`).append(
+                    `<span>${nombreColaborador}</span> `
+                ); // Actualizar la interfaz
+                $("#modalColaborador").modal("hide"); // Cerrar el modal
+            } else {
+                alert(res.message); // Mostrar mensaje de error
+            }
+        },
+        error: function () {
+            alert("Hubo un error al agregar el colaborador.");
+        },
+    });
+});
 });
