@@ -3,12 +3,24 @@ require 'vendor/autoload.php';  // Asegúrate de tener Composer instalado y la l
 
 // Conexión a MongoDB
 $uri = "mongodb+srv://angelrp:abc123.@cluster0.76po7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-$cliente = new MongoDB\Client( $uri);
+$cliente = new MongoDB\Client($uri);
 // Selecciona la base de datos y la colección
 $bd = $cliente->kanvan;  // Con "V", como mencionaste
 $coleccion = $bd->tareas;
+
+// Iniciar sesión para acceder al usuario logueado
+session_start();
+
+// Comprobar si hay un usuario logueado
+if (!isset($_SESSION['usuario'])) {
+    die("<script>alert('Error: Usuario no logueado.'); window.location.href='log.html';</script>");
+}
+
 // Obtener todas las tareas
 $tareas = $coleccion->find();
+
+// Usuario logueado
+$usuarioActual = $_SESSION['usuario'];
 
 $listaTareas = [
     "idea" => [],
@@ -17,15 +29,18 @@ $listaTareas = [
     "hecho" => []
 ];
 
-// Clasificar las tareas según su estado
+// Clasificar las tareas según su estado y creador
 foreach ($tareas as $tarea) {
-    $estado = strtolower($tarea['estado']);  //este errir que sino son minisculas no lo pilla
-    if (isset($listaTareas[$estado])) {
-        $listaTareas[$estado][] = $tarea;
+    $estado = strtolower($tarea['estado']);  // Normalizar el estado en minúsculas
+    // Verificar si el creador de la tarea es el usuario logueado
+    if (isset($tarea['creador']) && $tarea['creador'] === $usuarioActual) {
+        if (isset($listaTareas[$estado])) {
+            $listaTareas[$estado][] = $tarea;
+        }
     }
 }
-session_start();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
