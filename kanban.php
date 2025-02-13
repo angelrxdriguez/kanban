@@ -19,7 +19,7 @@ $listaTareas = [
 
 // Clasificar las tareas según su estado
 foreach ($tareas as $tarea) {
-    $estado = strtolower($tarea['estado']);  // Asegurar que sea minúsculas
+    $estado = strtolower($tarea['estado']);  //este errir que sino son minisculas no lo pilla
     if (isset($listaTareas[$estado])) {
         $listaTareas[$estado][] = $tarea;
     }
@@ -187,7 +187,8 @@ session_start();
     </div>
   </div>
   <!-- Modal Editar Tarea -->
-<div class="modal fade" id="editartarea" tabindex="-1" aria-labelledby="editartareaLabel" aria-hidden="true">
+   
+  <div class="modal fade" id="editartarea" tabindex="-1" aria-labelledby="editartareaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -195,8 +196,7 @@ session_start();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Formulario para Editar -->
-                <form action="editartarea.php" method="post">
+                <form id="edit-tarea-form" method="post">
                     <input type="hidden" name="id" id="editartarea-id">
                     <div class="mb-3">
                         <label for="tituloTarea" class="form-label">Título de la Tarea</label>
@@ -210,17 +210,12 @@ session_start();
                         <label for="colaboradores" class="form-label">Colaboradores</label>
                         <input type="text" class="form-control" name="colaboradores" id="editartarea-colaboradores" placeholder="Ingrese el nombre correcto">
                     </div>
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="submit" class="btn btn-primary" name="editarTarea">Editar</button>
                 </form>
-
-                <!-- Formulario separado para eliminar -->
-                <div class="mb-3 oscuro mt-4">
-                    <h4>¿ELIMINAR TAREA?</h4>
-                    <form action="eliminartarea.php" method="post" id="form-eliminar">
-                        <input type="hidden" name="id" id="eliminartarea-id">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                    </form>
-                    <h6 class="mt-2">¡CUIDADO! TU TAREA NO SE VOLVERÁ A MOSTRAR.</h6>
+                <div class="mt-4 text-center">
+                    <h4>¿Eliminar Tarea?</h4>
+                    <button id="eliminar-tarea-btn" class="btn btn-danger">Eliminar</button>
+                    <h6 class="mt-2 text-danger">¡CUIDADO! Tu tarea no se volverá a mostrar.</h6>
                 </div>
             </div>
             <div class="modal-footer">
@@ -229,6 +224,7 @@ session_start();
         </div>
     </div>
 </div>
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="main.js"></script>

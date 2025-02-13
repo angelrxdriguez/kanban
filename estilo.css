@@ -263,6 +263,10 @@ background-color: #a5f7a5;
     margin: 5%;
     border-radius: 5px;
 }
+.tarea:hover{
+    font-size: 105%;
+    transition: 0.5s;
+}
 .tittarea{
     padding: 2%;
     color: black;
