@@ -8,7 +8,7 @@ $cliente = new MongoDB\Client($uri);
 $bd = $cliente->kanvan;  // Con "V", como mencionaste
 $coleccion = $bd->tareas;
 
-// Iniciar sesión para acceder al usuario logueado
+// Iniciar sesión para acceder al usuario logueado o no
 session_start();
 
 // Comprobar si hay un usuario logueado
