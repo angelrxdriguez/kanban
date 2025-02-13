@@ -162,6 +162,7 @@ session_start();
         </div>
         <div class="modal-body">
             <form action="creartarea.php" method="post">
+            <input type="hidden" name="creador" value="<?php echo $_SESSION['usuario']; ?>">
             <input type="hidden" name="id">
                 <div class="mb-3">
                     <label for="tituloTarea" class="form-label">Título de la Tarea</label>
