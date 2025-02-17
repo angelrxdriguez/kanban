@@ -323,6 +323,15 @@ button{
     border-radius: 10px;
 }
 @media (min-width: 768px) and (max-width: 1458px) {
+    .contenedor{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    .columnaizq, .columna, .columnader, .columnader2 {
+        width: 90%; 
+        text-align: center;
+        padding: 10px;
+    }
     .log {
         flex-direction: column;
         width: 70%;
@@ -358,6 +367,15 @@ button{
     }
 }
 @media (max-width: 768px) {
+    .contenedor{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+    .columnaizq, .columna, .columnader, .columnader2 {
+        width: 90%; 
+        text-align: center;
+        padding: 10px;
+    }
     .tablerokanban{
         display: grid;
         grid-template-columns: repeat(1,1fr);

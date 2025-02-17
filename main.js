@@ -60,30 +60,29 @@ $(document).ready(function () {
             $("#editartarea input[name='titulo']").val(titulo);
             $("#editartarea textarea[name='descripcion']").val(descripcion);
             $("#editartarea input[name='colaboradores']").val(colaboradores);
-            $("#editartarea input[name='id']").val(tareaId); // Guardamos el ID en un campo oculto
+            $("#editartarea input[name='id']").val(tareaId);
     
             $("#editartarea").modal("show");
         });*/
         $(".editar").click(function () {
             let tarea = $(this).closest(".tarea");
-            let tareaId = tarea.attr("data-id");
+            let tareaId = tarea.attr("data-id"); //usar data id en todo**
             let titulo = tarea.find(".tittarea").text();
             let descripcion = tarea.find(".destarea").text();
             let colaboradores = tarea.find(".colaboradores").text();
     
-            // Llenamos los campos en el modal de edición
+            //modal editar campos ***************
             $("#editartarea-id").val(tareaId);
             $("#editartarea-titulo").val(titulo);
             $("#editartarea-descripcion").val(descripcion);
             $("#editartarea-colaboradores").val(colaboradores);
     
-            // Abrimos el modal
-            $("#editartarea").modal("show");
+
+            $("#editartarea").modal("show");//modal
         });
-    
-        // Enviar el formulario de edición con AJAX
-        $("#edit-tarea-form").submit(function (e) {
-            e.preventDefault(); // Evitar el envío tradicional
+
+        $("#editarform").submit(function (e) {
+            e.preventDefault(); //sin esto no va
     
             $.ajax({
                 url: "editartarea.php",
@@ -94,25 +93,28 @@ $(document).ready(function () {
                         let tareaId = $("#editartarea-id").val();
                         let tarea = $(".tarea[data-id='" + tareaId + "']");
     
-                        // Actualizar los valores en la tarjeta
+                        //actualizar mete .text id de el form
                         tarea.find(".tittarea").text($("#editartarea-titulo").val());
                         tarea.find(".destarea").text($("#editartarea-descripcion").val());
-                       // tarea.find(".colaboradores").text($("#editartarea-colaboradores").val());
+                       // tarea.find(".colaboradores").text($("#editartarea-colaboradores").val());  METER DESPUES**
     
                         $("#editartarea").modal("hide");
                     } else {
-                        alert("Error al actualizar la tarea.");
+                        alert("tarea editada...");
+                        location.reload();
+                        $("#editartarea").modal("hide");
+
                     }
                 },
                 error: function () {
-                    alert("Error en la solicitud AJAX.");
+                    alert("error en la soli");
                 }
             });
         });
     
-        // Eliminar tarea con AJAX
-        $("#eliminar-tarea-btn").click(function () {
-            let tareaId = $("#editartarea-id").val(); // Obtener el ID de la tarea
+        //eliminar *****************
+        $("#eliminarbtn").click(function () {
+            let tareaId = $("#editartarea-id").val(); //id tarea !!!**
     
             $.ajax({
                 url: "eliminartarea.php",
@@ -120,8 +122,8 @@ $(document).ready(function () {
                 data: { id: tareaId },
                 success: function (response) {
                     if (response === "success") {
-                        $(".tarea[data-id='" + tareaId + "']").remove(); // Eliminar del DOM
-                        $("#editartarea").modal("hide"); // Cerrar el modal
+                        $(".tarea[data-id='" + tareaId + "']").remove(); //se lo carga
+                        $("#editartarea").modal("hide"); 
                         alert("Tarea eliminada correctamente.");
                     } else {
                         alert("Error al eliminar la tarea.");
@@ -134,9 +136,9 @@ $(document).ready(function () {
 })
 /*colaborador*/
 $(".colaborador").on("click", function() {
-    let tareaId = $(this).closest(".tarea").attr("data-id"); // Obtener el ID de la tarea
-    $("#tareaId").val(tareaId); // Asignarlo al campo oculto en el modal
-    $("#modalColaborador").modal("show"); // Mostrar el modal
+    let tareaId = $(this).closest(".tarea").attr("data-id"); //id tarea 
+    $("#tareaId").val(tareaId); //campo oculto de e l id
+    $("#modalColaborador").modal("show"); 
 });
 
 $("#formColaborador").on("submit", function(event) {
@@ -145,8 +147,8 @@ $("#formColaborador").on("submit", function(event) {
     let nombreColaborador = $("#nombreColaborador").val();
     let tareaId = $("#tareaId").val();
 
-    if (!nombreColaborador || !tareaId) {
-        alert("Por favor, ingrese un nombre de colaborador.");
+    if (!nombreColaborador || !tareaId) { //check si no esta 
+        alert("mete el nombre de el colaborador");
         return;
     }
 
@@ -159,7 +161,7 @@ $("#formColaborador").on("submit", function(event) {
             if (response.success) {
                 alert(response.message);
                 
-                // Actualizar la UI: añadir el colaborador visualmente sin recargar la página
+                //sin recargar pagina
                 let tareaDiv = $(".tarea[data-id='" + tareaId + "']");
                 let colaboradoresP = tareaDiv.find(".colaboradores");
 
@@ -169,7 +171,7 @@ $("#formColaborador").on("submit", function(event) {
                     colaboradoresP.append(", " + response.colaborador);
                 }
 
-                $("#modalColaborador").modal("hide"); // Cerrar el modal
+                $("#modalColaborador").modal("hide"); 
             } else {
                 alert(response.message);
             }

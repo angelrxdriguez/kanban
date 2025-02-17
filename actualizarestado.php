@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nuevoEstado = $_POST['estado'];
 
     $coleccion->updateOne(
-        ["_id" => new MongoDB\BSON\ObjectId($id)],
+        ["_id" => new MongoDB\BSON\ObjectId($id)], //para coger id de mongo
         ['$set' => ["estado" => $nuevoEstado]]
     );
 

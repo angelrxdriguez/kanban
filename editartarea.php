@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if ($resultado->getModifiedCount() > 0) {
-        echo "success";
+        echo "ok";
     } else {
         echo "error";
     }

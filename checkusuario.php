@@ -7,15 +7,15 @@ $client = new MongoDB\Client($uri);
 $database = $client->kanvan; 
 $collection = $database->usuarios; 
 
-$username = $_POST['nombre'];
-$password = $_POST['contra'];
+$nombre = $_POST['nombre'];
+$contra = $_POST['contra'];
 
-$user = $collection->findOne(['nombre' => $username]);
+$user = $collection->findOne(['nombre' => $nombre]);
 
 if ($user) {
-    if ($password === $user['contra']) {
-        $_SESSION['usuario'] = $username; // Guardamos el usuario en la sesión
-        header('Location: index.php'); // Redirigir a index.php en lugar de index.html
+    if ($contra === $user['contra']) {
+        $_SESSION['usuario'] = $nombre; //para la sesion
+        header('Location: index.php');
         exit();
     } else {
         echo "<script>alert('Contraseña incorrecta.'); window.location.href='log.html';</script>";

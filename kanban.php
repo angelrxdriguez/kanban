@@ -1,25 +1,19 @@
 <?php
-require 'vendor/autoload.php';  // Asegúrate de tener Composer instalado y la librería mongodb/mongodb
-
-// Conexión a MongoDB
+require 'vendor/autoload.php'; 
 $uri = "mongodb+srv://angelrp:abc123.@cluster0.76po7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 $cliente = new MongoDB\Client($uri);
-// Selecciona la base de datos y la colección
-$bd = $cliente->kanvan;  // Con "V", como mencionaste
+$bd = $cliente->kanvan;  
 $coleccion = $bd->tareas;
 
-// Iniciar sesión para acceder al usuario logueado
 session_start();
 
-// Comprobar si hay un usuario logueado
+//para que no te deje entrar por la url sin log
 if (!isset($_SESSION['usuario'])) {
-    die("<script>alert('Error: Usuario no logueado.'); window.location.href='log.html';</script>");
+    die("<script>alert('Error:USUARIO NO REGISTRADO. LOGUEATE!!'); window.location.href='log.html';</script>");
 }
 
-// Obtener todas las tareas
 $tareas = $coleccion->find();
 
-// Usuario logueado
 $usuarioActual = $_SESSION['usuario'];
 
 $listaTareas = [
@@ -29,20 +23,19 @@ $listaTareas = [
     "hecho" => []
 ];
 
-// Clasificar las tareas según su estado y creador
 foreach ($tareas as $tarea) {
-    $estado = strtolower($tarea['estado']); // Normalizar el estado en minúsculas
+    $estado = strtolower($tarea['estado']); //minus
     
-    // Verificar si el usuario es el creador o admin
+    //creador o admin
     if ((isset($tarea['creador']) && $tarea['creador'] === $usuarioActual) || $usuarioActual === 'admin') {
         if (isset($listaTareas[$estado])) {
             $listaTareas[$estado][] = $tarea;
         }
     }
-    // Verificar si el usuario es colaborador
+    //colab
     elseif (isset($tarea['colaboradores']) && in_array($usuarioActual, (array)$tarea['colaboradores'])) {
         if (isset($listaTareas[$estado])) {
-            unset($tarea['botones']); // Eliminamos la clave de botones para que no se rendericen
+            unset($tarea['botones']); //se carga toda la clase botones
             $listaTareas[$estado][] = $tarea;
         }
     }
@@ -106,7 +99,7 @@ foreach ($tareas as $tarea) {
   <div class="separador"></div>
 
   <div class="tablerokanban">  
-      <!-- Columna IDEA -->
+      <!-- columna IDEA -->
       <div class="idea columnak">
           <h2 class="titk">IDEA</h2>
           <?php foreach ($listaTareas["idea"] as $tarea): ?>
@@ -117,8 +110,8 @@ foreach ($tareas as $tarea) {
         <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
             <div class="botones">
                 <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
-                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="editar"><img src="icono/edit.png" alt="" class="icono"></button>
                 <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
             </div>
         <?php endif; ?>
@@ -132,7 +125,7 @@ foreach ($tareas as $tarea) {
 <?php endforeach; ?>
       </div>
 
-      <!-- Columna HACER -->
+      <!-- columna HACER -->
       <div class="hacer columnak">
           <h2 class="titk">HACER</h2>
           <?php foreach ($listaTareas["hacer"] as $tarea): ?>
@@ -143,8 +136,8 @@ foreach ($tareas as $tarea) {
         <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
             <div class="botones">
                 <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
-                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="editar"><img src="icono/edit.png" alt="" class="icono"></button>
                 <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
             </div>
         <?php endif; ?>
@@ -158,7 +151,7 @@ foreach ($tareas as $tarea) {
 <?php endforeach; ?>
       </div>
 
-      <!-- Columna HACIENDO -->
+      <!-- columna HACIENDO -->
       <div class="haciendo columnak">
           <h2 class="titk">HACIENDO</h2>
           <?php foreach ($listaTareas["haciendo"] as $tarea): ?>
@@ -169,8 +162,8 @@ foreach ($tareas as $tarea) {
         <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
             <div class="botones">
                 <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
-                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="editar"><img src="icono/edit.png" alt="" class="icono"></button>
                 <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
             </div>
         <?php endif; ?>
@@ -184,7 +177,7 @@ foreach ($tareas as $tarea) {
 <?php endforeach; ?>
       </div>
 
-      <!-- Columna HECHO -->
+      <!-- columna HECHO -->
       <div class="hecho columnak">
           <h2 class="titk">HECHO</h2>
           <?php foreach ($listaTareas["hecho"] as $tarea): ?>
@@ -195,8 +188,8 @@ foreach ($tareas as $tarea) {
         <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
             <div class="botones">
                 <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
-                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="editar"><img src="icono/edit.png" alt="" class="icono"></button>
                 <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
             </div>
         <?php endif; ?>
@@ -255,7 +248,7 @@ foreach ($tareas as $tarea) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="edit-tarea-form" method="post">
+                <form id="editarform" method="post">
                     <input type="hidden" name="id" id="editartarea-id">
                     <div class="mb-3">
                         <label for="tituloTarea" class="form-label">Título de la Tarea</label>
@@ -273,7 +266,7 @@ foreach ($tareas as $tarea) {
                 </form>
                 <div class="mt-4 text-center">
                     <h4>¿Eliminar Tarea?</h4>
-                    <button id="eliminar-tarea-btn" class="btn btn-danger">Eliminar</button>
+                    <button id="eliminarbtn" class="btn btn-danger">Eliminar</button>
                     <h6 class="mt-2 text-danger">¡CUIDADO! Tu tarea no se volverá a mostrar.</h6>
                 </div>
             </div>

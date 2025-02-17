@@ -49,24 +49,24 @@
     <a href="kanban.php" class="kanbanenlace">KANBAN</a>
   </div>
   <div class="containertit">
-    <h1 class="tit">INFORMACIÓN</h1>
+    <h1 class="tit">INFO</h1>
   </div>
   <div class="contenedor">
     <div class="columnaizq">
       <h2>IDEA</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit ad in provident quisquam sequi minus quaerat iure error. Aliquam provident nostrum itaque nesciunt quis totam laboriosam possimus, eius eum sed.</p>
+      <p>En la seccion de idea , planearás tu tarea. Una vez este todo pensado se mueve a la lista por hacer</p>
     </div>
     <div class="columna">
       <h2>POR HACER</h2>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem, quisquam facere perspiciatis dignissimos totam eum cupiditate quod recusandae ea cum dicta debitis quam inventore. Officiis voluptatum optio numquam illo tempore?</p>
+      <p>En la seccion de idea , planearás tu tarea. Una vez este todo pensado se mueve a la lista por hacer</p>
     </div>
     <div class="columnader">
       <h2>HACIENDO</h2>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, nam at perferendis magni molestias ducimus, consequatur eaque, quas aspernatur quia unde? Dolores cumque laboriosam modi rem deleniti ratione tempora debitis!</p>
+      <p>En la seccion de idea , planearás tu tarea. Una vez este todo pensado se mueve a la lista por hacer</p>
     </div>
     <div class="columnader2">
       <h2>HECHO</h2>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, nam at perferendis magni molestias ducimus, consequatur eaque, quas aspernatur quia unde? Dolores cumque laboriosam modi rem deleniti ratione tempora debitis!</p>
+      <p>En la seccion de idea , planearás tu tarea. Una vez este todo pensado se mueve a la lista por hacer</p>
     </div>
   </div>
 </div>

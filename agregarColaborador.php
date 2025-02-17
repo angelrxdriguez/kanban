@@ -20,7 +20,7 @@ if (!$nombreColaborador || !$tareaId) {
     exit;
 }
 
-// Comprobar si el colaborador existe en la base de datos de usuarios
+//var usuario para el nombre dentro de todos los usuarios
 $usuario = $coleccionUsuarios->findOne(['nombre' => $nombreColaborador]);
 
 if (!$usuario) {
@@ -31,25 +31,25 @@ if (!$usuario) {
     exit;
 }
 
-// Convertir tareaId a ObjectId
+//id de mongo
 $tareaId = new MongoDB\BSON\ObjectId($tareaId);
 
-// Agregar el colaborador a la tarea (guardamos el nombre, no el ID)
+//guarda nombre no id
 $resultado = $coleccionTareas->updateOne(
     ['_id' => $tareaId],
-    ['$addToSet' => ['colaboradores' => $nombreColaborador]] // Guardamos el nombre
+    ['$addToSet' => ['colaboradores' => $nombreColaborador]] 
 );
 
-if ($resultado->getModifiedCount() > 0) {
+if ($resultado->getModifiedCount() > 0) { //si es mayor que 0 es pq algo se hizo
     echo json_encode([
         "success" => true,
-        "message" => "Colaborador agregado con éxito.",
+        "message" => "colaborador metido",
         "colaborador" => $nombreColaborador
     ]);
 } else {
     echo json_encode([
         "success" => false,
-        "message" => "No se pudo agregar el colaborador."
+        "message" => "error"
     ]);
 }
 ?>
