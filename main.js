@@ -97,7 +97,7 @@ $(document).ready(function () {
                         // Actualizar los valores en la tarjeta
                         tarea.find(".tittarea").text($("#editartarea-titulo").val());
                         tarea.find(".destarea").text($("#editartarea-descripcion").val());
-                        tarea.find(".colaboradores").text($("#editartarea-colaboradores").val());
+                       // tarea.find(".colaboradores").text($("#editartarea-colaboradores").val());
     
                         $("#editartarea").modal("hide");
                     } else {
@@ -133,47 +133,52 @@ $(document).ready(function () {
             });
 })
 /*colaborador*/
-$(".colaborador").on("click", function () {
-    const tareaId = $(this).closest(".tarea").data("id"); // Obtener el ID de la tarea
-    $("#tareaId").val(tareaId); // Pasar el ID de la tarea al input oculto en el modal
+$(".colaborador").on("click", function() {
+    let tareaId = $(this).closest(".tarea").attr("data-id"); // Obtener el ID de la tarea
+    $("#tareaId").val(tareaId); // Asignarlo al campo oculto en el modal
     $("#modalColaborador").modal("show"); // Mostrar el modal
 });
 
-// Manejar el envío del formulario para agregar colaborador
-$("#formColaborador").on("submit", function (e) {
-    e.preventDefault(); // Prevenir el envío del formulario
+$("#formColaborador").on("submit", function(event) {
+    event.preventDefault();
 
-    const nombreColaborador = $("#nombreColaborador").val().trim();
-    const tareaId = $("#tareaId").val();
+    let nombreColaborador = $("#nombreColaborador").val();
+    let tareaId = $("#tareaId").val();
 
-    if (!nombreColaborador) {
-        alert("Por favor, ingresa un nombre de colaborador.");
+    if (!nombreColaborador || !tareaId) {
+        alert("Por favor, ingrese un nombre de colaborador.");
         return;
     }
 
-    // Enviar los datos al servidor con AJAX
     $.ajax({
         url: "agregarColaborador.php",
         type: "POST",
-        data: {
-            nombreColaborador: nombreColaborador,
-            tareaId: tareaId,
-        },
-        success: function (response) {
-            const res = JSON.parse(response);
-            if (res.success) {
-                alert("Colaborador agregado con éxito.");
-                $(`[data-id="${tareaId}"] .colaboradores`).append(
-                    `<span>${nombreColaborador}</span> `
-                ); // Actualizar la interfaz
+        data: { nombreColaborador: nombreColaborador, tareaId: tareaId },
+        dataType: "json",
+        success: function(response) {
+            if (response.success) {
+                alert(response.message);
+                
+                // Actualizar la UI: añadir el colaborador visualmente sin recargar la página
+                let tareaDiv = $(".tarea[data-id='" + tareaId + "']");
+                let colaboradoresP = tareaDiv.find(".colaboradores");
+
+                if (colaboradoresP.text().trim() === "Sin colaboradores") {
+                    colaboradoresP.text(response.colaborador);
+                } else {
+                    colaboradoresP.append(", " + response.colaborador);
+                }
+
                 $("#modalColaborador").modal("hide"); // Cerrar el modal
             } else {
-                alert(res.message); // Mostrar mensaje de error
+                alert(response.message);
             }
         },
-        error: function () {
-            alert("Hubo un error al agregar el colaborador.");
-        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error("Error: ", textStatus, errorThrown, jqXHR.responseText);
+            alert("Hubo un error: " + jqXHR.responseText);
+        }
+        
     });
 });
 });

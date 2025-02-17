@@ -6,7 +6,7 @@ $uri = "mongodb+srv://angelrp:abc123.@cluster0.76po7.mongodb.net/?retryWrites=tr
 $cliente = new MongoDB\Client($uri);
 $bd = $cliente->kanvan; 
 $coleccionTareas = $bd->tareas;
-$coleccionUsuarios = $bd->usuarios; // Asegúrate de tener esta colección
+$coleccionUsuarios = $bd->usuarios;
 
 // Obtener datos enviados por AJAX
 $nombreColaborador = $_POST['nombreColaborador'] ?? null;
@@ -20,7 +20,7 @@ if (!$nombreColaborador || !$tareaId) {
     exit;
 }
 
-// Comprobar si el colaborador existe en la colección de usuarios
+// Comprobar si el colaborador existe en la base de datos de usuarios
 $usuario = $coleccionUsuarios->findOne(['nombre' => $nombreColaborador]);
 
 if (!$usuario) {
@@ -34,17 +34,17 @@ if (!$usuario) {
 // Convertir tareaId a ObjectId
 $tareaId = new MongoDB\BSON\ObjectId($tareaId);
 
-// Agregar el colaborador a la tarea
+// Agregar el colaborador a la tarea (guardamos el nombre, no el ID)
 $resultado = $coleccionTareas->updateOne(
     ['_id' => $tareaId],
-    ['$addToSet' => ['colaboradores' => $usuario['_id']]] // Guardamos el ID del usuario como colaborador
+    ['$addToSet' => ['colaboradores' => $nombreColaborador]] // Guardamos el nombre
 );
 
 if ($resultado->getModifiedCount() > 0) {
     echo json_encode([
         "success" => true,
         "message" => "Colaborador agregado con éxito.",
-        "colaborador" => $usuario['nombre'] // Devolvemos el nombre para mostrarlo en la interfaz
+        "colaborador" => $nombreColaborador
     ]);
 } else {
     echo json_encode([
@@ -52,3 +52,4 @@ if ($resultado->getModifiedCount() > 0) {
         "message" => "No se pudo agregar el colaborador."
     ]);
 }
+?>

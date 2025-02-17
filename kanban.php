@@ -31,14 +31,25 @@ $listaTareas = [
 
 // Clasificar las tareas según su estado y creador
 foreach ($tareas as $tarea) {
-    $estado = strtolower($tarea['estado']);  // Normalizar el estado en minúsculas
-    // Verificar si el creador de la tarea es el usuario logueado
-    if (isset($tarea['creador']) && $tarea['creador'] === $usuarioActual) {
+    $estado = strtolower($tarea['estado']); // Normalizar el estado en minúsculas
+    
+    // Verificar si el usuario es el creador o admin
+    if ((isset($tarea['creador']) && $tarea['creador'] === $usuarioActual) || $usuarioActual === 'admin') {
         if (isset($listaTareas[$estado])) {
             $listaTareas[$estado][] = $tarea;
         }
     }
+    // Verificar si el usuario es colaborador
+    elseif (isset($tarea['colaboradores']) && in_array($usuarioActual, (array)$tarea['colaboradores'])) {
+        if (isset($listaTareas[$estado])) {
+            unset($tarea['botones']); // Eliminamos la clave de botones para que no se rendericen
+            $listaTareas[$estado][] = $tarea;
+        }
+    }
 }
+
+
+
 ?>
 
 
@@ -99,76 +110,104 @@ foreach ($tareas as $tarea) {
       <div class="idea columnak">
           <h2 class="titk">IDEA</h2>
           <?php foreach ($listaTareas["idea"] as $tarea): ?>
-              <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+    <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+        <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
+        <p class="destarea"><?= $tarea['descripcion'] ?></p>
 
-                  <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
-                  <p class="destarea"><?= $tarea['descripcion'] ?></p>
-                  <div class="botones">
-                    <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                    <button class="editar">EDITAR</button>
-                    <button class="colaborador">colaborador</button>
-                    <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
-                </div>
-                  <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
-              </div>
-          <?php endforeach; ?>
+        <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
+            <div class="botones">
+                <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
+                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
+            </div>
+        <?php endif; ?>
+
+        <p class="colaboradores">
+            <?= isset($tarea['colaboradores']) && is_array($tarea['colaboradores']) 
+                ? implode(" ", $tarea['colaboradores']) 
+                : ""; ?>
+        </p>
+    </div>
+<?php endforeach; ?>
       </div>
 
       <!-- Columna HACER -->
       <div class="hacer columnak">
           <h2 class="titk">HACER</h2>
           <?php foreach ($listaTareas["hacer"] as $tarea): ?>
-              <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+    <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+        <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
+        <p class="destarea"><?= $tarea['descripcion'] ?></p>
 
-                  <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
-                  <p class="destarea"><?= $tarea['descripcion'] ?></p>
-                  <div class="botones">
-                    <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                    <button class="editar">EDITAR</button>
-                    <button class="colaborador">colaborador</button>
-                    <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
-                </div>
-                  <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
-              </div>
-          <?php endforeach; ?>
+        <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
+            <div class="botones">
+                <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
+                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
+            </div>
+        <?php endif; ?>
+
+        <p class="colaboradores">
+            <?= isset($tarea['colaboradores']) && is_array($tarea['colaboradores']) 
+                ? implode(" ", $tarea['colaboradores']) 
+                : ""; ?>
+        </p>
+    </div>
+<?php endforeach; ?>
       </div>
 
       <!-- Columna HACIENDO -->
       <div class="haciendo columnak">
           <h2 class="titk">HACIENDO</h2>
           <?php foreach ($listaTareas["haciendo"] as $tarea): ?>
-              <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+    <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+        <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
+        <p class="destarea"><?= $tarea['descripcion'] ?></p>
 
-                  <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
-                  <p class="destarea"><?= $tarea['descripcion'] ?></p>
-                  <div class="botones">
-                    <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                    <button class="editar">EDITAR</button>
-                    <button class="colaborador">colaborador</button>
-                    <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
-                </div>
-                  <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
-              </div>
-          <?php endforeach; ?>
+        <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
+            <div class="botones">
+                <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
+                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
+            </div>
+        <?php endif; ?>
+
+        <p class="colaboradores">
+            <?= isset($tarea['colaboradores']) && is_array($tarea['colaboradores']) 
+                ? implode(" ", $tarea['colaboradores']) 
+                : ""; ?>
+        </p>
+    </div>
+<?php endforeach; ?>
       </div>
 
       <!-- Columna HECHO -->
       <div class="hecho columnak">
           <h2 class="titk">HECHO</h2>
           <?php foreach ($listaTareas["hecho"] as $tarea): ?>
-              <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+    <div class="tarea" data-id="<?= $tarea['_id'] ?>">
+        <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
+        <p class="destarea"><?= $tarea['descripcion'] ?></p>
 
-                  <h5 class="tittarea"><?= $tarea['titulo'] ?></h5>
-                  <p class="destarea"><?= $tarea['descripcion'] ?></p>
-                  <div class="botones">
-                    <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
-                    <button class="editar">EDITAR</button>
-                    <button class="colaborador">colaborador</button>
-                    <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
-                </div>
-                  <p class="colaboradores"><?= $tarea['colaboradores'] ?></p>
-              </div>
-          <?php endforeach; ?>
+        <?php if ($tarea['creador'] === $usuarioActual || $usuarioActual === 'admin'): ?>
+            <div class="botones">
+                <button class="atras"><img src="icono/anterior.png" alt="" class="flecha"></button>
+                <button class="editar"><img src="icono/add-group.png" alt="" class="icono"></button>
+                <button class="colaborador"><img src="icono/edit.png" alt="" class="icono"></button>
+                <button class="siguiente"><img src="icono/siguiente.png" alt="" class="flecha"></button>
+            </div>
+        <?php endif; ?>
+
+        <p class="colaboradores">
+            <?= isset($tarea['colaboradores']) && is_array($tarea['colaboradores']) 
+                ? implode(" ", $tarea['colaboradores']) 
+                : ""; ?>
+        </p>
+    </div>
+<?php endforeach; ?>
       </div>
   </div>
     <!--modal crearTarea-->
@@ -191,14 +230,14 @@ foreach ($tareas as $tarea) {
                     <label for="descripcionTarea" class="form-label">Descripción</label>
                     <textarea class="form-control" name="descripcion" rows="3" placeholder="Describe la tarea" required></textarea>
                 </div>
-                <div class="mb-3">
+               <!-- <div class="mb-3">
                     <label for="colaboradores" class="form-label">Colaboradores</label>
                     <input type="text" class="form-control" name="colaboradores" placeholder="SOLO UN COLABORADOR">
-                </div>
+                </div>-->
                 <button type="submit" class="btn btn-primary" name="crearTarea">Crear</button>
             </form>
             
-        </div>
+        </div> 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" name="crearTarea">Cancelar</button>
          
@@ -230,7 +269,7 @@ foreach ($tareas as $tarea) {
                         <label for="colaboradores" class="form-label">Colaboradores</label>
                         <input type="text" class="form-control" name="colaboradores" id="editartarea-colaboradores" placeholder="Ingrese el nombre correcto">
                     </div>-->
-                    <button type="submit" class="btn btn-primary" name="editarTarea">Editar</button>
+                    <button type="submit" class="btn btn-primary" name="editarTarea">EDITAR</button>
                 </form>
                 <div class="mt-4 text-center">
                     <h4>¿Eliminar Tarea?</h4>

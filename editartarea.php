@@ -9,14 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
-    $colaboradores = $_POST['colaboradores'];
+    //$colaboradores = $_POST['colaboradores'];
 
     $resultado = $coleccion->updateOne(
         ['_id' => new MongoDB\BSON\ObjectId($id)],
         ['$set' => [
             'titulo' => $titulo,
             'descripcion' => $descripcion,
-            'colaboradores' => $colaboradores
+            //'colaboradores' => $colaboradores
         ]]
     );
 

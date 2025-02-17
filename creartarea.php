@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["crearTarea"])) {
     $tarea = [
         "titulo" => $titulo,
         "descripcion" => $descripcion,
-        "colaboradores" => $colaboradores,
+        "colaboradores" => $colaboradores ? [$colaboradores] : [], // Si no hay colaboradores, usa un arreglo vacío
         "creador" => $creador, // Agregar el creador de la tarea
         "estado" => "idea", // Estado inicial de la tarea
     ];

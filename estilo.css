@@ -242,6 +242,21 @@ nav{
     border-radius: 10px;
     color: #000;
 }
+.colaborador{
+    background-color: #16abdc;
+    padding: 1%;
+    color: white;
+    font-size: 130%;
+}
+.colaborador:hover{
+    background-color: #fbff00;
+    transition: 0.05s;
+    border-radius: 10px;
+    color: #000;
+}
+.icono{
+    width: 30%;
+}
 .idea{
 background-color: #f7a5a5;
 }
@@ -334,8 +349,21 @@ button{
         display: flex;
         color: red;
     }
+    /*KANBAN*/
+    .tablerokanban{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        text-align: center;
+        margin: 0 auto;
+    }
 }
 @media (max-width: 768px) {
+    .tablerokanban{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        text-align: center;
+        margin: 0 auto;
+    }
     .log {
         flex-direction: column;
         width: 90%;
